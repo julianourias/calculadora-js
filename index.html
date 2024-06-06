@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Tabuada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gerador de Tabuada</h1>
+    <p>Desenvolvido por: Juliano Augusto Cavalcante Urias</p>
+    
+    <div>
+        <label for="numero">Digite um número inteiro:</label>
+        <input type="text" id="numero" name="numero">
+        <button onclick="gerarTabuada()">Gerar Tabuada</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <script>
+        function gerarTabuada() {
+            const input = document.getElementById('numero').value;
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerHTML = '';
+
+            const numero = parseInt(input);
+
+            if (isNaN(numero)) {
+                resultadoDiv.innerHTML = '<p class="error">Por favor, insira um número inteiro válido.</p>';
+                return;
+            }
+
+            const tabela = document.createElement('table');
+            const header = tabela.insertRow();
+            const th1 = document.createElement('th');
+            th1.innerText = 'Multiplicação';
+            const th2 = document.createElement('th');
+            th2.innerText = 'Resultado';
+            header.appendChild(th1);
+            header.appendChild(th2);
+
+            for (let i = 1; i <= 10; i++) {
+                const row = tabela.insertRow();
+                const cell1 = row.insertCell();
+                const cell2 = row.insertCell();
+                cell1.innerText = `${numero} x ${i}`;
+                cell2.innerText = numero * i;
+            }
+
+            resultadoDiv.appendChild(tabela);
+        }
+    </script>
+
+</body>
+</html>
