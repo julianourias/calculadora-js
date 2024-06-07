@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Tabuada</title>
     <style>
+        /* Estilização básica para o corpo da página */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -12,18 +13,22 @@
             align-items: center;
             margin-top: 50px;
         }
+        /* Estilização para a tabela */
         table {
             margin-top: 20px;
             border-collapse: collapse;
         }
+        /* Estilização para as células da tabela */
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
+        /* Estilização para o cabeçalho da tabela */
         th {
             background-color: #f2f2f2;
         }
+        /* Estilização para a mensagem de erro */
         .error {
             color: red;
             margin-top: 10px;
@@ -32,31 +37,44 @@
 </head>
 <body>
 
+    <!-- Título da página -->
     <h1>Gerador de Tabuada</h1>
+    <!-- Identificação dos desenvolvedores -->
     <p>Desenvolvido por: Juliano Augusto Cavalcante Urias</p>
     
     <div>
+        <!-- Campo de entrada para o usuário inserir o número -->
         <label for="numero">Digite um número inteiro:</label>
         <input type="text" id="numero" name="numero">
+        <!-- Botão para gerar a tabuada -->
         <button onclick="gerarTabuada()">Gerar Tabuada</button>
     </div>
 
+    <!-- Div para exibir o resultado da tabuada -->
     <div id="resultado"></div>
 
     <script>
+        // Função para gerar a tabuada
         function gerarTabuada() {
+            // Obtém o valor do campo de entrada
             const input = document.getElementById('numero').value;
+            // Seleciona a div de resultados e limpa seu conteúdo
             const resultadoDiv = document.getElementById('resultado');
             resultadoDiv.innerHTML = '';
 
+            // Converte o valor de entrada para um número inteiro
             const numero = parseInt(input);
 
+            // Verifica se o valor de entrada é um número válido
             if (isNaN(numero)) {
+                // Exibe uma mensagem de erro se a entrada não for válida
                 resultadoDiv.innerHTML = '<p class="error">Por favor, insira um número inteiro válido.</p>';
                 return;
             }
 
+            // Cria uma nova tabela para exibir a tabuada
             const tabela = document.createElement('table');
+            // Cria a linha de cabeçalho da tabela
             const header = tabela.insertRow();
             const th1 = document.createElement('th');
             th1.innerText = 'Multiplicação';
@@ -65,14 +83,18 @@
             header.appendChild(th1);
             header.appendChild(th2);
 
+            // Gera as linhas da tabuada de 1 a 10
             for (let i = 1; i <= 10; i++) {
+                // Cria uma nova linha na tabela
                 const row = tabela.insertRow();
                 const cell1 = row.insertCell();
                 const cell2 = row.insertCell();
+                // Preenche as células com a operação e o resultado
                 cell1.innerText = `${numero} x ${i}`;
                 cell2.innerText = numero * i;
             }
 
+            // Adiciona a tabela gerada na div de resultados
             resultadoDiv.appendChild(tabela);
         }
     </script>
